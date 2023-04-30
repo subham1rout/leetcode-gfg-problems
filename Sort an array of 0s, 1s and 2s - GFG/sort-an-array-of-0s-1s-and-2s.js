@@ -67,26 +67,24 @@ class Solution {
     
     sort012(arr, N)
     {
-        let count0 = 0;
-        let count1 = 0;
-        let count2 = 0;
-        for (let i = 0; i < N; i++) {
-            if (arr[i] == 0) {
-                count0++;
-            } else if (arr[i] == 1) {
-                count1++;
-            } else {
-                count2++;
+        let low=0;
+        let mid=0;
+        let high=N-1;
+        while(mid<=high){
+            if(arr[mid]===0){
+                let temp=arr[mid];
+                arr[mid]=arr[low];
+                arr[low]=temp;
+                low++;
+                mid++;
+            }else if(arr[mid]===1){
+                mid++;
+            }else{
+                let temp=arr[mid];
+                arr[mid]=arr[high];
+                arr[high]=temp;
+                high--;
             }
-        }
-        for (let i = 0; i < count0; i++) {
-            arr[i] = 0;
-        }
-        for (let i = count0; i < count0 + count1; i++) {
-            arr[i] = 1;
-        }
-        for (let j = count0 + count1; j < N; j++) {
-            arr[j] = 2;
         }
     }
 }
