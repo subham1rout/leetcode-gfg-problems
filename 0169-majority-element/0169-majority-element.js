@@ -3,16 +3,17 @@
  * @return {number}
  */
 var majorityElement = function(nums) {
-    let size=nums.length;
-    for (let i = 0; i < size; i++) {
-        let count = 0;
-        for (let j = 0; j < size; j++) {
-            if (nums[i] === nums[j]) {
-                count++;
-            }
-        }
-        if (count > size / 2) {
-            return nums[i];
+    let el;
+    let count=0;
+    for(let i=0;i<nums.length;i++){
+        if(count==0){
+            el=nums[i];
+            count=1;
+        }else if(nums[i]==el){
+            count++;
+        }else{
+            count--;
         }
     }
+    return el;
 };
