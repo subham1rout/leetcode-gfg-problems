@@ -55,14 +55,15 @@ function main() {
 class Solution {
     
     maxSubarraySum(arr, N){
-        let max = Number.MIN_SAFE_INTEGER;
-        for (let i = 0; i < N; i++) {
-            let sum = 0;
-            for (let j = i; j < N; j++) {
-                sum += arr[j];
-                if (sum > max) {
-                    max = sum;
-                }
+        let max=Number.MIN_SAFE_INTEGER;
+        let sum=0;
+        for(let i=0;i<N;i++){
+            sum+=arr[i];
+            if(sum>max){
+                max=sum;
+            }
+            if(sum<0){
+                sum=0;
             }
         }
         return max;
