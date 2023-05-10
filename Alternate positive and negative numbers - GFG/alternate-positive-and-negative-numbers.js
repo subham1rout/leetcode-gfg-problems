@@ -64,45 +64,39 @@ function main() {
 
 class Solution{
     rearrange(arr,n){
-        let positivearr = [];
-        let negativearr = [];
-        for (let i = 0; i < n; i++) {
+        let length = arr.length;
+        let posarr = [];
+        let negarr = [];
+        for (let i = 0; i < length; i++) {
             if (arr[i] >= 0) {
-                positivearr.push(arr[i]);
+                posarr.push(arr[i]);
             } else {
-                negativearr.push(arr[i]);
+                negarr.push(arr[i]);
             }
         }
-        let templength;
-        let positivelength=positivearr.length;
-        let negativelength=negativearr.length;
-        
-        if(positivelength>negativelength){
-            templength=negativelength;
-        }else{
-            templength=positivelength;
-        }
-        for (let i = 0; i < templength; i++) {
-            arr[2 * i] = positivearr[i];
-        }
-        for (let i = 0; i < templength; i++) {
-            arr[2 * i + 1] = negativearr[i];
-        }
-        
-        let templength1=2*templength;
-        
-        let i=templength;
-        while(i<positivelength){
-            arr[templength1]=positivearr[i];
-            templength1++;
-            i++;
-        }
-
-        let j=templength;
-        while(j<negativelength){
-            arr[templength1]=negativearr[j];
-            templength1++;
-            j++;
+        // console.log(posarr);
+        // console.log(negarr);
+        if (posarr.length > negarr.length) {
+            for (let i = 0; i < negarr.length; i++) {
+                arr[2 * i] = posarr[i];
+                arr[2 * i + 1] = negarr[i];
+            }
+            let templength = negarr.length * 2;
+            for (let i = negarr.length; i < posarr.length; i++) {
+                arr[templength] = posarr[i];
+                templength++;
+            }
+            
+        } else {
+            for (let i = 0; i < posarr.length; i++) {
+                arr[2 * i] = posarr[i];
+                arr[2 * i + 1] = negarr[i];
+            }
+            let templength = posarr.length * 2;
+            for (let i = posarr.length; i < negarr.length; i++) {
+                arr[templength] = negarr[i];
+                templength++;
+            }
         }
         return arr;
     }
