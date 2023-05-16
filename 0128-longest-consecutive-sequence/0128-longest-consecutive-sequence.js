@@ -7,20 +7,22 @@ var longestConsecutive = function(nums) {
     if(n==0){
         return 0;
     }
-    nums=nums.sort((a,b)=>a-b);
     let max=1;
-    let count=0;
-    let smaller=Number.MIN_SAFE_INTEGER;
+    let set=new Set();
     for(let i=0;i<n;i++){
-        if(nums[i]-1 ==smaller){
-            count++;
-            smaller=nums[i];
+        set.add(nums[i]);
+    }
+    for(const el of set){
+        let x=el;
+        if(!set.has(x-1)){
+            let count=1;
+            while(set.has(x+1)){
+                count++;
+                x++;
+            }
             if(count>max){
                 max=count;
             }
-        }else if(nums[i]!==smaller){
-            count=1;
-            smaller=nums[i];
         }
     }
     return max;
