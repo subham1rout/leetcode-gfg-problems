@@ -5,35 +5,21 @@
 var setZeroes = function(matrix) {
     let m=matrix.length;
     let n=matrix[0].length;
+    let rowarr=new Array(m).fill(0);
+    let colarr=new Array(n).fill(0);
     for(let i=0;i<m;i++){
         for(let j=0;j<n;j++){
             if(matrix[i][j]==0){
-                markRow(matrix,n,i);
-                markColumn(matrix,m,j);
+                rowarr[i]=1;
+                colarr[j]=1;
             }
         }
     }
     for(let i=0;i<m;i++){
         for(let j=0;j<n;j++){
-            if(matrix[i][j]==-1000){
+            if(rowarr[i] || colarr[j]){
                 matrix[i][j]=0;
             }
         }
     }
 };
-
-var markRow=(arr,n,i)=>{
-    for(let k=0;k<n;k++){
-        if(arr[i][k]!=0){
-            arr[i][k]=-1000;
-        }
-    }
-}
-
-var markColumn=(arr,m,j)=>{
-    for(let k=0;k<m;k++){
-        if(arr[k][j]!== 0){
-            arr[k][j]=-1000;
-        }
-    }
-}
