@@ -12,15 +12,18 @@ var rotate = function(matrix) {
         }
     }
     for(let i=0;i<n;i++){
-        // reverse(matrix[i]);
-        let start=0;
-        let end=matrix[i].length-1;
-        while(start<end){
-            let temp=matrix[i][start];
-            matrix[i][start]=matrix[i][end];
-            matrix[i][end]=temp;
-            start++;
-            end--;
-        }
+        reverse(matrix[i]);
     }
 };
+
+var reverse=(arr)=>{
+    let start=0;
+    let end=arr.length-1;
+    while(start<end){
+        let temp=arr[start];
+        arr[start]=arr[end];
+        arr[end]=temp;
+        start++;
+        end--;
+    }
+}
