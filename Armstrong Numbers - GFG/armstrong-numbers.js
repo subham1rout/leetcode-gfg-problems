@@ -64,16 +64,17 @@ function main() {
 class Solution{
     armstrongNumber(n){
         let x=n;
-        let arr=[];
         let length=0;
-        while(x>0){
-            arr.push(x%10);
-            length++;
-            x=Math.floor(x/10);
-        }
         let newno=0;
-        for(let i of arr){
-            newno+=Math.pow(i,length);
+        while(x>0){
+            x=Math.floor(x/10);
+            length++;
+        }
+        x=n;
+        while(x>0){
+            let r=x%10;
+            newno+=Math.pow(r,length);
+            x=Math.floor(x/10);
         }
         if(n==newno) return "Yes";
         else return "No";
