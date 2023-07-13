@@ -50,12 +50,13 @@ function main() {
 class Solution {
     
     isPalindrome(S){
-        let newarr=[];
-        for(let i=0;i<S.length;i++){
-            newarr.push(S[S.length-i-1]);
+        function check(S,i){
+            if(i>=Math.floor(S.length/2)) return 1;
+            if(S[i]!=S[S.length-1-i]) return 0;
+            return check(S,i+1);
         }
-        newarr=newarr.join('');
-        if(S==newarr) return 1;
-        else return 0;
+        return check(S,0);
     }
+    
+    
 }
