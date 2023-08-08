@@ -72,17 +72,19 @@ function main() {
 */
 
 class Solution{
+    reverse(arr, start, end) {
+        while (start < end) {
+            let temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
+            start++;
+            end--;
+        }
+    }
     leftRotate(arr,n,d){
-        let temp = [];
-        for (let i = 0; i < d; i++) {
-            temp.push(arr[i]);
-        }
-        for (let i = d; i < n; i++) {
-            arr[i - d] = arr[i];
-        }
-        for (let i = 0; i < temp.length; i++) {
-            arr[n - d + i] = temp[i];
-        }
-        return arr;
+        d=d % n;
+        this.reverse(arr,0,d-1);
+        this.reverse(arr,d,n-1);
+        this.reverse(arr,0,n-1);
     }
 }
