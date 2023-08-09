@@ -63,16 +63,21 @@ function main() {
 
 class Solution {
     pushZerosToEnd(arr,n){
-        let temp = [];
-        for (let i = 0; i < n; i++) {
-            if (arr[i] != 0) temp.push(arr[i]);
+        let j=-1;
+        for(let i=0;i<n;i++){
+            if(arr[i]==0){
+                j=i;
+                break;
+            }
         }
-        for (let i = 0; i < temp.length; i++) {
-            arr[i] = temp[i];
+        if(j==-1) return;
+        for(let i=j+1;i<n;i++){
+            if(arr[i]!=0){
+                let temp=arr[i];
+                arr[i]=arr[j];
+                arr[j]=temp;
+                j++;
+            }
         }
-        for (let i = temp.length; i < n; i++) {
-            arr[i] = 0;
-        }
-        return arr;
     }
 }
