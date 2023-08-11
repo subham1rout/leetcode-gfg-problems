@@ -73,13 +73,34 @@ class Solution {
     //Function to return a list containing the union of the two arrays. 
     findUnion(arr1, arr2, n, m)
     {
-        let set = new Set();
-        for (let i = 0; i < n; i++) {
-            set.add(arr1[i]);
+        let i=0;
+        let j=0;
+        let unionarr=[];
+        while(i<n && j<m){
+            if(arr1[i]<=arr2[j]){
+                if(unionarr.length==0 || unionarr[unionarr.length-1]!=arr1[i]){
+                    unionarr.push(arr1[i]);
+                }
+                i++;
+            }else{
+                if(unionarr.length==0 || unionarr[unionarr.length-1]!=arr2[j]){
+                    unionarr.push(arr2[j]);
+                }
+                j++;
+            }
         }
-        for (let i = 0; i < m; i++) {
-            set.add(arr2[i]);
+        while(j<m){
+            if(unionarr.length==0 || unionarr[unionarr.length-1]!=arr2[j]){
+                unionarr.push(arr2[j]);
+            }
+            j++;
         }
-        return Array.from(set).sort((a, b) => a - b);
+        while(i<n){
+            if(unionarr.length==0 || unionarr[unionarr.length-1]!=arr1[i]){
+                unionarr.push(arr1[i]);
+            }
+            i++;
+        }
+        return unionarr;
     }
 }
