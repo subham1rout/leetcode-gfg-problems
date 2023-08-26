@@ -3,14 +3,11 @@
  * @return {number}
  */
 var missingNumber = function(nums) {
-    let hasharr = new Array(nums.length + 1).fill(0);
-    for (let i = 0; i < nums.length; i++) {
-        hasharr[nums[i]] = 1;
+    let n=nums.length;
+    let sum=Math.floor(n*(n+1)/2);
+    let sum1=0;
+    for(let i=0;i<n;i++){
+        sum1+=nums[i];
     }
-    for (let i = 0; i <= nums.length+1; i++) {
-        if (hasharr[i] == 0) {
-            return i;
-        }
-    }
-     
+    return sum-sum1;
 };
