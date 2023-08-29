@@ -59,17 +59,10 @@ class Solution {
     
     search(a,N)
     {
-        let map=new Map();
+        let xor=0;
         for(let i=0;i<N;i++){
-            let value=map.get(a[i]);
-            if(!value){
-                map.set(a[i],1);
-            }else{
-                map.set(a[i],value+1);
-            }
+            xor=xor^a[i];
         }
-        for(const [key,value] of map){
-            if(value==1) return key;
-        }
+        return xor;
     }
 }
