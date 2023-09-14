@@ -3,16 +3,17 @@
  * @return {number}
  */
 var majorityElement = function(nums) {
-    let n=nums.length;
-    for(let i=0;i<n;i++){
-        let count=0;
-        for(let j=0;j<n;j++){
-            if(nums[i]==nums[j]){
-                count++;
-            }
+    let map=new Map();
+    for(let i=0;i<nums.length;i++){
+        if(map.has(nums[i])){
+            map.set(nums[i],map.get(nums[i])+1)
+        }else{
+            map.set(nums[i],1);
         }
-        if(count>Math.floor(n/2)){
-            return nums[i];
+    }
+    for(const [key,value] of map){
+        if(value>Math.floor(nums.length/2)){
+            return key;
         }
     }
 };
