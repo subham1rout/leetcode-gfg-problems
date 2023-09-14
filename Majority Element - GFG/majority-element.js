@@ -60,19 +60,14 @@ class Solution {
             if(count==0){
                 el=a[i];
                 count=1;
-            }else if(a[i]==el){
-                count++;
-            }else{
-                count--;
-            }
+            }else if(el==a[i]) count++;
+            else count--;
         }
         let count1=0;
         for(let i=0;i<size;i++){
-            if(a[i]==el){
-                count1++;
-            }
+            if(el==a[i]) count1++;
         }
-        if(count1>size/2){
+        if(count1>Math.floor(size/2)){
             return el;
         }
         return -1;
