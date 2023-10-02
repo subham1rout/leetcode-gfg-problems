@@ -64,40 +64,23 @@ function main() {
 
 class Solution{
     rearrange(arr,n){
-        let length = arr.length;
-        let posarr = [];
-        let negarr = [];
-        for (let i = 0; i < length; i++) {
-            if (arr[i] >= 0) {
-                posarr.push(arr[i]);
-            } else {
-                negarr.push(arr[i]);
-            }
+        let parr=[];
+        let narr=[];
+        for(let i=0;i<n;i++){
+            if(arr[i]<0) narr.push(arr[i]);
+            else parr.push(arr[i]);
         }
-        // console.log(posarr);
-        // console.log(negarr);
-        if (posarr.length > negarr.length) {
-            for (let i = 0; i < negarr.length; i++) {
-                arr[2 * i] = posarr[i];
-                arr[2 * i + 1] = negarr[i];
-            }
-            let templength = negarr.length * 2;
-            for (let i = negarr.length; i < posarr.length; i++) {
-                arr[templength] = posarr[i];
-                templength++;
-            }
-            
-        } else {
-            for (let i = 0; i < posarr.length; i++) {
-                arr[2 * i] = posarr[i];
-                arr[2 * i + 1] = negarr[i];
-            }
-            let templength = posarr.length * 2;
-            for (let i = posarr.length; i < negarr.length; i++) {
-                arr[templength] = negarr[i];
-                templength++;
-            }
+        let ans=[];
+        for(let i=0,j=0;i<parr.length&&j<narr.length;i++,j++){
+            ans.push(parr[i]);
+            ans.push(narr[j]);
         }
-        return arr;
+        for(let i=Math.floor(ans.length/2);i<parr.length;i++){
+            ans.push(parr[i]);
+        }
+        for(let i=Math.floor(ans.length/2);i<narr.length;i++){
+            ans.push(narr[i]);
+        }
+        return ans;
     }
 }
