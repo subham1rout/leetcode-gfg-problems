@@ -70,17 +70,23 @@ class Solution{
             if(arr[i]<0) narr.push(arr[i]);
             else parr.push(arr[i]);
         }
-        let ans=[];
-        for(let i=0,j=0;i<parr.length&&j<narr.length;i++,j++){
-            ans.push(parr[i]);
-            ans.push(narr[j]);
+        let i=0;
+        let j=0;
+        while(i<parr.length&&j<narr.length){
+            arr[2*i]=parr[i];
+            arr[2*i+1]=narr[j];
+            i++;
+            j++;
         }
-        for(let i=Math.floor(ans.length/2);i<parr.length;i++){
-            ans.push(parr[i]);
+        let l=i*2;
+        for(let k=i;k<parr.length;k++){
+            arr[l]=parr[k];
+            l++;
         }
-        for(let i=Math.floor(ans.length/2);i<narr.length;i++){
-            ans.push(narr[i]);
+        for(let k=j;k<narr.length;k++){
+            arr[l]=narr[k];
+            l++;
         }
-        return ans;
+        return arr;
     }
 }
