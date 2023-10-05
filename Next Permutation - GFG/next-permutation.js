@@ -63,7 +63,6 @@ function main() {
  */
 
 class Solution {
-    
     reverse(arr,start,end){
         while(start<end){
             let temp=arr[start];
@@ -74,7 +73,6 @@ class Solution {
         }
         return arr;
     }
-    
     nextPermutation(arr,n){
         let index=-1;
         for(let i=n-2;i>=0;i--){
