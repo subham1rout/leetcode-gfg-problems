@@ -57,19 +57,30 @@ function main() {
  */
  
 class Solution {
+    
+    reverse(arr){
+        let start=0;
+        let end=arr.length-1;
+        while(start<end){
+            let temp=arr[start];
+            arr[start]=arr[end];
+            arr[end]=temp;
+            start++;
+            end--;
+        }
+        return arr;
+    }
+    
     //Function to find the leaders in the array.
     leaders(arr, n){
         let leaders = [];
-        for (let i = 0; i < n; i++) {
-            let flag = 0;
-            for (let j = i + 1; j < n; j++) {
-                if (arr[i] < arr[j]) {
-                    flag = 1;
-                    break;
-                }
+        let max=Number.MIN_SAFE_INTEGER;
+        for(let i=n-1;i>=0;i--){
+            if(arr[i]>=max){
+                leaders.push(arr[i]);
+                max=arr[i];
             }
-            if (flag == 0) leaders.push(arr[i]);
         }
-        return leaders;
+        return this.reverse(leaders);
     }
 }
