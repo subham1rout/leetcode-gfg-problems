@@ -65,20 +65,18 @@ class Solution {
     //Function to return length of longest subsequence of consecutive integers.
     findLongestConseqSubseq(arr, N){
         arr=arr.sort((a,b)=>a-b);
-        let max=1;
+        let lastSmaller=Number.MIN_SAFE_INTEGER;
         let count=0;
-        let smaller=Number.MIN_SAFE_INTEGER;
+        let max=1;
         for(let i=0;i<N;i++){
-            if(arr[i]-1 ==smaller){
+            if(arr[i]-1==lastSmaller){
                 count++;
-                smaller=arr[i];
-                if(count>max){
-                    max=count;
-                }
-            }else if(arr[i]!==smaller){
+                lastSmaller=arr[i];
+            }else if(arr[i]!=lastSmaller){
+                lastSmaller=arr[i];
                 count=1;
-                smaller=arr[i];
             }
+            if(count>max) max=count;
         }
         return max;
     }
