@@ -64,19 +64,21 @@ function main() {
 class Solution {
     //Function to return length of longest subsequence of consecutive integers.
     findLongestConseqSubseq(arr, N){
-        arr=arr.sort((a,b)=>a-b);
-        let lastSmaller=Number.MIN_SAFE_INTEGER;
-        let count=0;
-        let max=1;
+        const set=new Set();
+        let max=0;
         for(let i=0;i<N;i++){
-            if(arr[i]-1==lastSmaller){
-                count++;
-                lastSmaller=arr[i];
-            }else if(arr[i]!=lastSmaller){
-                lastSmaller=arr[i];
-                count=1;
+            set.add(arr[i]);
+        }
+        for(const value of set){
+            if(set.has(value-1)==false){
+                let count=1;
+                let temp=value;
+                while(set.has(temp+1)){
+                    count++;
+                    temp++;
+                }
+                if(count>max) max=count;
             }
-            if(count>max) max=count;
         }
         return max;
     }
