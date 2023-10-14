@@ -2,31 +2,37 @@
  * @param {number[][]} matrix
  * @return {void} Do not return anything, modify matrix in-place instead.
  */
+
+var markRow=(arr,i,n)=>{
+    for(let j=0;j<n;j++){
+        if(arr[i][j]!==0){
+            arr[i][j]=Number.MAX_SAFE_INTEGER;
+        }
+    }
+}
+var markColumn=(arr,j,m)=>{
+    for(let i=0;i<m;i++){
+        if(arr[i][j]!==0){
+            arr[i][j]=Number.MAX_SAFE_INTEGER;
+        }
+    }
+}
 var setZeroes = function(matrix) {
     let m=matrix.length;
     let n=matrix[0].length;
-    let temp=1;
     for(let i=0;i<m;i++){
         for(let j=0;j<n;j++){
             if(matrix[i][j]==0){
-                matrix[i][0]=0;
-                if(j==0){
-                    temp=0;
-                }else{  
-                    matrix[0][j]=0;
-                }
+                markRow(matrix,i,n);
+                markColumn(matrix,j,m);
             }
         }
     }
-    for(let i=1;i<m;i++){
-        for(let j=1;j<n;j++){
-            if(matrix[i][j]!=0){
-                if(matrix[i][0]==0 || matrix[0][j]==0){
-                    matrix[i][j]=0;
-                }
+    for(let i=0;i<m;i++){
+        for(let j=0;j<n;j++){
+            if(matrix[i][j]==Number.MAX_SAFE_INTEGER){
+                matrix[i][j]=0;
             }
         }
     }
-    if(matrix[0][0]==0){ for(let j=0;j<n;j++) matrix[0][j]=0 }
-    if(temp==0){ for(let i=0;i<m;i++) matrix[i][0]=0 }
 };
