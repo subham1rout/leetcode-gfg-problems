@@ -72,22 +72,22 @@ class Solution
     //Function to rotate matrix anticlockwise by 90 degrees.
     rotateby90(matrix, n) 
     { 
-        let newmatrix = [];
-        for (let i = 0; i < n; i++) {
-            let arr = [];
-            for (let j = 0; j < n; j++) {
-                arr.push(0);
-            }
-            newmatrix.push(arr);
-        }
-        for (let i = 0; i < n; i++) {
-            for (let j = 0; j < n; j++) {
-                newmatrix[n-1-j][i] = matrix[i][j];
+        for(let i=0;i<n-1;i++){
+            for(let j=i+1;j<n;j++){
+                let temp=matrix[i][j];
+                matrix[i][j]=matrix[j][i];
+                matrix[j][i]=temp;
             }
         }
         for(let i=0;i<n;i++){
-            for(let j=0;j<n;j++){
-                matrix[i][j]=newmatrix[i][j];
+            let start=0;
+            let end=n-1;
+            while(start<end){
+                let temp=matrix[start][i];
+                matrix[start][i]=matrix[end][i];
+                matrix[end][i]=temp;
+                start++;
+                end--;
             }
         }
     } 
