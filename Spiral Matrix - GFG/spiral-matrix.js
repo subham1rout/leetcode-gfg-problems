@@ -76,34 +76,34 @@ function main() {
 
 class Solution{
     findK(a,n,m,k){
-        let ans=[];
-        let top=0;
-        let bottom=n-1;
-        let left=0;
-        let right=m-1;
-        while(top<=bottom && left<=right){
-            for(let i=left;i<=right;i++){
-                ans.push(a[top][i]);
+        let left = 0;
+        let top = 0;
+        let right = m - 1;
+        let bottom = n - 1;
+        let newarr = [];
+        while (left <= right && top <= bottom) {
+            for (let i = left; i <= right; i++) {
+                newarr.push(a[top][i]);
             }
             top++;
-            for(let i=top;i<=bottom;i++){
-                ans.push(a[i][right]);
+            for (let i = top; i <= bottom; i++) {
+                newarr.push(a[i][right]);
             }
             right--;
-            if(top<=bottom){
-                 for(let i=right;i>=left;i--){
-                    ans.push(a[bottom][i]);
-                }   
+            if (top <= bottom) {
+                for (let i = right; i >= left; i--) {
+                    newarr.push(a[bottom][i]);
+                }
                 bottom--;
             }
-            if(left<=right){
-                for(let i=bottom;i>=top;i--){
-                    ans.push(a[i][left]);
+            if (left <= right) {
+                for (let i = bottom; i >= top; i--) {
+                    newarr.push(a[i][left]);
                 }
-                left++;   
+                left++;
             }
         }
-        return ans[k-1];
+        return newarr[k-1];
     }
 }
 
