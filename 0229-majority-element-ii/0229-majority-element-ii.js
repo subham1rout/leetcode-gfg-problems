@@ -3,20 +3,36 @@
  * @return {number[]}
  */
 var majorityElement = function(nums) {
-    const map=new Map();
-    let res=[];
-    for(let i=0;i<nums.length;i++){
-        let value=map.get(nums[i]);
-        if(value==undefined){
-            value=0;
-            map.set(nums[i],1);
+    let el1=Number.MIN_SAFE_INTEGER;
+    let el2=Number.MIN_SAFE_INTEGER;
+    let count1=0;
+    let count2=0;
+    let n=nums.length;
+    for(let i=0;i<n;i++){
+        if(count1==0 && el2!=nums[i]){
+            count1=1;
+            el1=nums[i];
+        }else if(count2==0 && el1!=nums[i]){
+            count2=1;
+            el2=nums[i];
+        }else if(nums[i]==el1){
+            count1++;
+        }else if(nums[i]==el2){
+            count2++;
         }else{
-            map.set(nums[i],value+1);
+            count1--;
+            count2--;
         }
-        if(value+1==Math.floor(nums.length/3)+1){
-            res.push(nums[i]);
-        }
-        if(res.length==2) break;
     }
-    return res;
+    let ans=[];
+    count1=0;
+    count2=0;
+    for(let i=0;i<n;i++){
+        if(nums[i]==el1) count1++;
+        else if(nums[i]==el2) count2++
+    }
+    let value=Math.floor(n/3);
+    if(count1>value) ans.push(el1);
+    if(count2>value) ans.push(el2);
+    return ans;
 };
