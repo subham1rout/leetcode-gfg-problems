@@ -73,22 +73,13 @@ class Solution {
         Intervals.sort((a,b)=>a[0]-b[0]);
         let ans=[];
         for(let i=0;i<n;i++){
-            let start=Intervals[i][0];
-            let end=Intervals[i][1];
-            if(ans.length!==0 && ans[ans.length-1][1]>=end){
-                continue;
-            }
-            for(let j=i+1;j<n;j++){
-                if(Intervals[j][0]<=end){
-                    if(end<Intervals[j][1]){
-                        end=Intervals[j][1];
-                    }
-                    
-                }else{
-                    break;
+            if(ans.length==0 || ans[ans.length-1][1]<Intervals[i][0]){
+                ans.push(Intervals[i]);
+            }else{
+                if(Intervals[i][1]>ans[ans.length-1][1]){
+                    ans[ans.length-1][1]=Intervals[i][1];
                 }
             }
-            ans.push([start,end]);
         }
         return ans;
     }
