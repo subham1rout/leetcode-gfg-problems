@@ -69,35 +69,20 @@ class Solution {
     //Function to merge the arrays.
     merge(arr1, arr2, n, m)
     {
-        let i=0;
-        let j=0;
-        let index=0;
-        let mrgArr=[];
-        while(i<n && j<m){
-            if(arr1[i]<=arr2[j]){
-                mrgArr.push(arr1[i]);
-                i++;
-                index++;
+        let left=n-1;
+        let right=0;
+        while(left>=0 && right<m){
+            if(arr1[left]>arr2[right]){
+                let temp=arr1[left];
+                arr1[left]=arr2[right];
+                arr2[right]=temp;
+                left--;
+                right++;
             }else{
-                mrgArr.push(arr2[j]);
-                j++;
-                index++;
+                break;
             }
         }
-        while(i<n){
-            mrgArr.push(arr1[i++]);
-            index++;
-        }
-        while(j<m){
-            mrgArr.push(arr2[j++]);
-            index++;
-        }
-        for(let k=0;k<n+m;k++){
-            if(k<n){
-                arr1[k]=mrgArr[k];
-            }else{
-                arr2[k-n]=mrgArr[k];
-            }
-        }
+        arr1.sort((a,b)=>a-b);
+        arr2.sort((a,b)=>a-b);
     }
 }
