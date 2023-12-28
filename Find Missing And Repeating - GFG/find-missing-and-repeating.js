@@ -69,22 +69,19 @@ class Solution
     //Function to find two repeating elements in an array of size n.
     findTwoElement(arr, n)
     {
-        let x=-1;
-        let y=-1;
-        let hasharr=new Array(n+1).fill(0);
+        let sn=Math.floor(n*(n+1)/2);
+        let s2n=Math.floor((n*(n+1)*(2*n+1))/6);
+        let s=0;
+        let s2=0;
         for(let i=0;i<n;i++){
-            hasharr[arr[i]]++;
+            s+=arr[i];
+            s2+=arr[i]*arr[i];
         }
-        for(let i=1;i<=n;i++){
-            if(hasharr[i]==2){
-                x=i;
-            }else if(hasharr[i]==0){
-                y=i;
-            }
-            if(x!=-1 && y!=-1){
-                break;
-            }
-        }
+        let value=s-sn;
+        let value1=s2-s2n;
+        value1=Math.floor(value1/value);
+        let x=Math.floor((value+value1)/2);
+        let y=x-value;
         return [x,y];
     }
 }
