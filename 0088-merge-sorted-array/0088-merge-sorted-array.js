@@ -6,30 +6,45 @@
  * @return {void} Do not return anything, modify nums1 in-place instead.
  */
 var merge = function(nums1, m, nums2, n) {
-    let i=0;
-    let j=0;
-    let mrgArr=[];
-    let index=0;
-    while(i<m && j<n){
-        if(nums1[i]<=nums2[j]){
-            mrgArr.push(nums1[i]);
-            i++;
-            index++;
+    let gap=Math.ceil((m+n)/2);
+    while(gap>0){
+        let left=0;
+        let right=left+gap;
+        while(right<n+m){
+            if(left<m && right>=m){
+                if(nums1[left]>nums2[right-m]){
+                    let temp=nums1[left];
+                    nums1[left]=nums2[right-m];
+                    nums2[right-m]=temp;
+                }
+            }else if(left<m && right<m){
+                if(nums1[left]>nums1[right]){
+                    let temp=nums1[left];
+                    nums1[left]=nums1[right];
+                    nums1[right]=temp;
+                }
+            }else{
+                if(nums2[left-m]>nums2[right-m]){
+                    let temp=nums2[left-m];
+                    nums2[left-m]=nums2[right-m];
+                    nums2[right-m]=temp;
+                }
+            }
+            left++;
+            right++;
+        }
+        if(gap==1) break;
+        gap=Math.ceil(gap/2);
+    }
+    let merge=[];
+    for(let k=0;k<m+n;k++){
+        if(k<m){
+            merge[k]=nums1[k];
         }else{
-            mrgArr.push(nums2[j]);
-            j++;
-            index++
+            merge[k]=nums2[k-m];
         }
     }
-    while(i<m){
-        mrgArr.push(nums1[i++]);
-        index++;
-    }
-    while(j<n){
-        mrgArr.push(nums2[j++]);
-        index++;
-    }
-    for(let k=0;k<m+n;k++){
-        nums1[k]=mrgArr[k];
+    for(let i=0;i<m+n;i++){
+        nums1[i]=merge[i];
     }
 };
