@@ -68,12 +68,20 @@ function main() {
 class Solution {
     maxProduct(arr,n){
         let max=Number.MIN_SAFE_INTEGER;
+        let prefixM=1n;
+        let suffixM=1n;
         for(let i=0;i<n;i++){
-            let temp=1n;
-            for(let j=i;j<n;j++){
-                temp*=arr[j];
-                if(temp>max){
-                    max=temp;
+            if(prefixM==0n) prefixM=1n;
+            if(suffixM==0n) suffixM=1n;
+            prefixM*=arr[i];
+            suffixM*=arr[n-1-i];
+            if(prefixM>suffixM){
+                if(prefixM>max){
+                    max=prefixM;
+                }
+            }else{
+                if(suffixM>max){
+                    max=suffixM;
                 }
             }
         }
