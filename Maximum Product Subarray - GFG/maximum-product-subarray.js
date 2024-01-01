@@ -69,11 +69,9 @@ class Solution {
     maxProduct(arr,n){
         let max=Number.MIN_SAFE_INTEGER;
         for(let i=0;i<n;i++){
+            let temp=1n;
             for(let j=i;j<n;j++){
-                let temp=1n;
-                for(let k=i;k<=j;k++){
-                    temp*=arr[k];
-                }
+                temp*=arr[j];
                 if(temp>max){
                     max=temp;
                 }
