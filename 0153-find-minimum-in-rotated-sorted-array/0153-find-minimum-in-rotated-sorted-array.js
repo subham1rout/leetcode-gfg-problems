@@ -7,6 +7,12 @@ var findMin = function(nums) {
     let high=nums.length-1;
     let ans=Number.MAX_SAFE_INTEGER;
     while(low<=high){
+        if(nums[low]<=nums[high]){
+            if(nums[low]<ans){
+                ans=nums[low];
+            }
+            break;
+        }
         let mid=Math.floor((low+high)/2);
         if(nums[low]<=nums[mid]){
             if(nums[low]<ans){
