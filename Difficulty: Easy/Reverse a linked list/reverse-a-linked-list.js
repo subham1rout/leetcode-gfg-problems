@@ -73,35 +73,19 @@ class Node{
 }
 */
 
-class Stack{
-    constructor(){
-        this.items=[];
-    }
-    push(data){
-        this.items.push(data);
-    }
-    pop(){
-        return this.items.pop();
-    }
-}
-
 class Solution {
     // Function to reverse a linked list.
     reverseList(head) {
-        if(head==undefined || head.next==undefined){
-            return head;
+        let prev = null;
+        let current = head;
+        
+        while (current) {
+            let nextNode = current.next;
+            current.next = prev;        
+            prev = current;              
+            current = nextNode;
         }
-        let temp=head;
-        let news=new Stack();
-        while(temp){
-            news.push(temp.data);
-            temp=temp.next;
-        }
-        temp=head;
-        while(temp){
-            temp.data=news.pop();
-            temp=temp.next;
-        }
-        return head;
+        
+        return prev;
     }
 }
