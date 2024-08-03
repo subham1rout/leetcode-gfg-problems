@@ -11,14 +11,14 @@
  * @return {boolean}
  */
 var hasCycle = function(head) {
-    let temp=head;
-    let map=new Map();
-    while(temp){
-        if(map.has(temp)){
+    let slow=head;
+    let fast=head;
+    while(fast!=null && fast.next!=null){
+        slow=slow.next;
+        fast=fast.next.next;
+        if(slow==fast){
             return true;
         }
-        map.set(temp,1);
-        temp=temp.next;
     }
     return false;
 };
