@@ -10,31 +10,33 @@
  * @return {boolean}
  */
 
-class Stack {
-    constructor() {
-        this.arr = [];
+var reverse=function(head){
+    let temp=head;
+    let prev=undefined;
+    while(temp){
+        let front=temp.next;
+        temp.next=prev;
+        prev=temp;
+        temp=front;
     }
-    push(data) {
-        this.arr.push(data);
-    }
-    pop() {
-        return this.arr.pop();
-    }
+    return prev;
 }
 
 var isPalindrome = function(head) {
-    let stack = new Stack();
-    let temp = head;
-    while (temp) {
-        stack.push(temp.val);
-        temp = temp.next;
+    let slow=head;
+    let fast=head;
+    while(fast.next && fast.next.next){
+        slow=slow.next;
+        fast=fast.next.next;
     }
-    temp = head;
-    while (temp) {
-        if (temp.val !== stack.pop()) {
-            return false;
-        }
-        temp = temp.next;
+    let newhead=reverse(slow.next);
+    let temp1=head;
+    let temp2=newhead;
+    while(temp2){
+        if(temp1.val!==temp2.val) return false;
+        temp1=temp1.next;
+        temp2=temp2.next;
     }
+    reverse(newhead);
     return true;
 };
