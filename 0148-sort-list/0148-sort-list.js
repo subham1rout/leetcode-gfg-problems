@@ -9,20 +9,44 @@
  * @param {ListNode} head
  * @return {ListNode}
  */
+
+function getMiddle(head) {
+    let slow = head;
+    let fast = head.next;
+    while (fast && fast.next) {
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+    return slow;
+}
+
+function merge(lefthead, righthead) {
+    let dummyNode = new ListNode(-1);
+    let temp = dummyNode;
+    while (lefthead && righthead) {
+        if (lefthead.val <= righthead.val) {
+            temp.next = lefthead;
+            lefthead = lefthead.next;
+        } else {
+            temp.next = righthead;
+            righthead = righthead.next;
+        }
+        temp = temp.next;
+    }
+    if (lefthead) temp.next = lefthead;
+    else temp.next = righthead;
+    return dummyNode.next;
+}
+    
 var sortList = function(head) {
-    let temp=head;
-    let arr=[];
-    while(temp){
-        arr.push(temp.val);
-        temp=temp.next;
+    if (head == null || head.next == null) {
+        return head;
     }
-    arr=arr.sort((a,b)=>a-b);
-    temp=head;
-    let i=0;
-    while(temp){
-        temp.val=arr[i];
-        i++;
-        temp=temp.next;
-    }
-    return head;
+    let middle = getMiddle(head);
+    let lefthead = head;
+    let righthead = middle.next;
+    middle.next = null;
+    lefthead = sortList(lefthead);
+    righthead = sortList(righthead);
+    return merge(lefthead, righthead);
 };
