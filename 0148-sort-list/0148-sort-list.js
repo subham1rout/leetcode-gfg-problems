@@ -9,44 +9,45 @@
  * @param {ListNode} head
  * @return {ListNode}
  */
-
-function getMiddle(head) {
-    let slow = head;
-    let fast = head.next;
-    while (fast && fast.next) {
-        slow = slow.next;
-        fast = fast.next.next;
+var getMiddle=(head)=>{
+    if(head==null || head.next==null) return head;
+    let slow=head;
+    let fast=slow.next;
+    while(fast && fast.next){
+        slow=slow.next;
+        fast=fast.next.next;
     }
     return slow;
 }
 
-function merge(lefthead, righthead) {
-    let dummyNode = new ListNode(-1);
-    let temp = dummyNode;
-    while (lefthead && righthead) {
-        if (lefthead.val <= righthead.val) {
-            temp.next = lefthead;
-            lefthead = lefthead.next;
-        } else {
-            temp.next = righthead;
-            righthead = righthead.next;
+var merge=(lefth,righth)=>{
+    let dummyN=new ListNode(-1);
+    let temp=dummyN;
+    while(lefth && righth){
+        if(lefth.val<=righth.val){
+            temp.next=lefth;
+            temp=lefth;
+            lefth=lefth.next;
+        }else{
+            temp.next=righth;
+            temp=righth;
+            righth=righth.next;
         }
-        temp = temp.next;
     }
-    if (lefthead) temp.next = lefthead;
-    else temp.next = righthead;
-    return dummyNode.next;
-}
-    
+    if(lefth) temp.next=lefth;
+    else temp.next=righth;
+    return dummyN.next;
+} 
+
 var sortList = function(head) {
-    if (head == null || head.next == null) {
+    if(head==null || head.next==null){
         return head;
     }
-    let middle = getMiddle(head);
-    let lefthead = head;
-    let righthead = middle.next;
-    middle.next = null;
-    lefthead = sortList(lefthead);
-    righthead = sortList(righthead);
-    return merge(lefthead, righthead);
+    let middle=getMiddle(head);
+    let lefthead=head;
+    let righthead=middle.next;
+    middle.next=null;
+    lefthead=sortList(lefthead);
+    righthead=sortList(righthead);
+    return merge(lefthead,righthead);
 };
