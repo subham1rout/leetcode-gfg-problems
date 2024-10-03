@@ -75,20 +75,29 @@ class Node{
 class Solution {
     // Function to sort a linked list of 0s, 1s and 2s.
     segregate(head) {
-        let temp=head;
-        let arr=[];
-        while(temp){
-            arr.push(temp.data);
-            temp=temp.next;
+        let zeroH = new Node(-1);
+        let oneH = new Node(-1);
+        let twoH = new Node(-1);
+        let temp = head;
+        let zero = zeroH;
+        let one = oneH;
+        let two = twoH;
+        while (temp) {
+            if (temp.data == 0) {
+                zero.next = temp;
+                zero = temp;
+            } else if (temp.data == 1) {
+                one.next = temp;
+                one = temp;
+            } else {
+                two.next = temp;
+                two = temp;
+            }
+            temp = temp.next;
         }
-        arr.sort((a,b)=>a-b);
-        temp=head;
-        let i=0;
-        while(temp){
-            temp.data=arr[i];
-            i++;
-            temp=temp.next;
-        }
-        return head;
+        zero.next = (oneH.next) ? oneH.next : twoH.next;
+        one.next = twoH.next;
+        two.next = null;
+        return zeroH.next;
     }
 }
