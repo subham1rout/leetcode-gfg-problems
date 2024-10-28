@@ -93,29 +93,41 @@ You only need to complete the below method.
 */
 
 class Solution {
-    addOne(node) {
-        if(node==null) return null;
-        let temp=node;
-        let str='';
+    reverse(head){
+        let temp=head;
+        let prev=null;
         while(temp){
-            str+=temp.data;
+            let front=temp.next;
+            temp.next=prev;
+            prev=temp;
+            temp=front;
+        }
+        return prev;
+    }
+    addOne(node) {
+        let tempH=node;
+        tempH=this.reverse(tempH);
+        let carry=1;
+        let temp=tempH;
+        while(temp){
+            let val=temp.data+carry;
+            if(val<10){
+                temp.data=val;
+                carry=0;
+                break;
+            }else{
+                temp.data=0;
+                carry=1;
+            }
             temp=temp.next;
         }
-        let num=BigInt(str);
-        let value= (num+1n).toString().split('');
-        let head;
-        temp=head;
-        for(let i=0;i<value.length;i++){
-            let newN=new Node(value[i]);
-            if(i==0){
-                head=newN;
-                temp=newN;
-                
-            }else{
-                temp.next=newN;
-                temp=temp.next;
-            }
+        tempH=this.reverse(tempH);
+        // console.log(tempH)
+        if(carry==1){
+            let newN=new Node(1);
+            newN.next=tempH;
+            return newN;
         }
-        return head;
+        return tempH;
     }
 }
